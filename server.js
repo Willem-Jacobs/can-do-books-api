@@ -1,17 +1,15 @@
 "use strict";
 
-require("dotenv").config();
 const express = require("express");
 const app = express();
-
 const cors = require("cors");
 app.use(cors());
-
 const jwt = require("jsonwebtoken");
 const jwksClient = require("jwks-rsa");
 const client = jwksClient({
   jwksUri: "https://dev-bqwezv2c.us.auth0.com/.well-known/jwks.json",
 });
+require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
 
