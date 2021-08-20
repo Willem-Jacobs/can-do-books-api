@@ -1,7 +1,7 @@
 # Can Do Books API - Backend
 
 **Author**: Willem Jacobs
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.1 (increment the patch/fix version number if you make more commits past your first submission)
 **Deployed Site**: NONE
 **Backend Server** NONE
 
@@ -24,11 +24,13 @@ Backend for Can Do Books. Has a test endpoint to get the JWT from Auth0 and retu
 - cors
 - Axios
 - auth0
+- Mongoose/MongoDB
 - UML Lab-11 - ![UML](CE-Lab11-UML.png "UML Image")
 
 ## Change Log
 
-08.14.2021 7:00pm (V1.0.0) - First release.
+08.14.2021 7:00pm (EST) (V1.0.0) - First release.
+08.19.2021 9:00pm (EST) (V1.0.1) - Added route for `/books` that will use your token to verify your authenticity before providing you the book info located in the mongoDB. Has a route for `/clear & /seed` to clear the database or seed a record into the DB. Messages provided.
 
 ## Credit and Collaborations
 
@@ -45,3 +47,15 @@ No collaborations from others on this project.
 **Finish time:** 07:00pm
 
 **Actual time needed to complete:** 2 hours.
+
+### Lab 12 Trello Card #1
+
+**Name of feature:** Mongoose DB & Route
+
+**Estimate of time needed to complete:** 1 hour
+
+**Start time:** 05:00pm
+
+**Finish time:** 06:00pm
+
+**Actual time needed to complete:** 1 hours.
