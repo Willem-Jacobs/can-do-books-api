@@ -54,19 +54,19 @@ app.get("/", (req, res) => {
 
 app.get("/books", (req, res) => {
   try {
-    // const token = req.headers.authorization.split(" ")[1];
-    // jwt.verify(token, getKey, {}, function (err, user) {
-    //   if (err) {
-    //     res.status(500).send("invlaid token");
-    //   } else {
-    BookModel.find((err, dataBaseResults) => {
+    const token = req.headers.authorization.split(" ")[1];
+    jwt.verify(token, getKey, {}, function (err, user) {
       if (err) {
-        res.status(500).send("Can't access the database");
+        res.status(500).send("invlaid token");
       } else {
-        res.status(200).send(dataBaseResults);
+        BookModel.find((err, dataBaseResults) => {
+          if (err) {
+            res.status(500).send("Can't access the database");
+          } else {
+            res.status(200).send(dataBaseResults);
+          }
+        });
       }
-      // });
-      // }
     });
   } catch (err) {
     res.status(500).send("database error");
