@@ -43,20 +43,20 @@ async function getBookId(req, res, next) {
 async function getAll(req, res) {
   const email = req.query.email;
   try {
-    // const token = req.headers.authorization.split(" ")[1];
-    // jwt.verify(token, getKey, {}, function (err, user) {
-    //   if (err) {
-    //     res.status(500).send("invlaid token");
-    //   } else {
-    BookModel.find({}, (err, dataBaseResults) => {
+    const token = req.headers.authorization.split(" ")[1];
+    jwt.verify(token, getKey, {}, function (err, user) {
       if (err) {
-        res.status(500).json({ message: err.message });
+        res.status(500).send("invlaid token");
       } else {
-        res.status(200).json(dataBaseResults);
+        BookModel.find({}, (err, dataBaseResults) => {
+          if (err) {
+            res.status(500).json({ message: err.message });
+          } else {
+            res.status(200).json(dataBaseResults);
+          }
+        });
       }
     });
-    //   }
-    // });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
