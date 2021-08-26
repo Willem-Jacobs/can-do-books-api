@@ -103,7 +103,7 @@ async function updateById(req, res) {
       { title, description, email, status },
       { new: true, overwrite: true }
     );
-    res.status(200).json(udpatedBook);
+    res.status(200).json(updatedBook);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
