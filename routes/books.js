@@ -13,8 +13,9 @@ router.get("/clear", clear); //Clears DB
 router.post("/seed", seed); //Seeds a book to the DB
 router.get("/", getAll); //Gets all books from DB
 router.get("/:id", getBookId, getById); //Gets one book from DB by ID using middleware
-router.post("/", addNew); //Adds a new book to DB from form frontend.
+router.post("/", addNew); //Adds a new book to DB from form frontend
 router.delete("/:id", getBookId, deleteById); //Deletes one book from DB by ID using middleware
+router.put("/:id", updateById); // Update a record by ID. Not using the middleware
 
 function getKey(header, callback) {
   client.getSigningKey(header.kid, function (err, key) {
@@ -47,7 +48,7 @@ async function getAll(req, res) {
       if (err) {
         res.status(500).send("invlaid token");
       } else {
-        BookModel.find({ email }, (err, dataBaseResults) => {
+        BookModel.find({}, (err, dataBaseResults) => {
           if (err) {
             res.status(500).json({ message: err.message });
           } else {
@@ -87,6 +88,22 @@ async function deleteById(req, res) {
   try {
     await res.book.remove();
     res.json({ message: "Deleted book" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
+// Function to put (udpate) a record by ID this is NOT using the middleware to pre-load the record by ID.
+async function updateById(req, res) {
+  try {
+    let myId = req.params.id;
+    let { title, description, email, status } = req.body;
+    const updatedBook = await BookModel.findByIdAndUpdate(
+      myId,
+      { title, description, email, status },
+      { new: true, overwrite: true }
+    );
+    res.status(200).json(updatedBook);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
